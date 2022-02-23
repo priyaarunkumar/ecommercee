@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block metadescription %}
+{% if category %}
+{{ category.desc }}
+{% else %}}
+<h3> WELCOME PRODUCT</h3>
+{% endif %}
+{% endblock %}
+{% block title %}
+{% if category %}
+{{ category.name }}.... fruits collections in stock
+{% else %}
+<h3> SEE OUR COLLECTIONS</h3>
+{% endif %}
+{% endblock %}
+{% block  content %}
+{% if category %}
+<div>
+    <div>
+        </p><a href="{% url 'shoppapp:allpdtcat' %}">ALL PRODUCT</a>
+    </div>
+</div>
+{% endif %}
+<div style="text-align:center;">
+    {% if category %}
+
+
+
+    <img src="{{category.img.url}}" alt="{{category.name}}" width="1000px;" height="400px;"></div>
+<br>
+<div style="text-align:center;">
+    <h3>{{category.name}}</h3>
+    <br>
+    <h3>{{category.desc}}</h3>
+    </div>
+{% else %}
+<div>
+    <img src="{% static 'img/banner.png' %}" alt="our pdt" width="1300px;" height="300px;"></div>
+<br>
+
+<div>
+<h4><u>OUR PRODUCT COLLECTIONS</u></h4>
+    <p>Lorem ipsum was introduced to the digital world in the mid-1980s, when Aldus employed it in graphic and word-processing templates for its desktop publishing program PageMaker</p></div>
+{% endif %}
+<div class="container">
+    <div class="row mx_auto">
+        {% for i in products.object_list %}
+        <div class="my_bottom_margin col-9 col-sm-12  col-md-4 xol-lg-4">
+
+        <div class="card text-center" style="min-width:18rem;">
+            <a href="{{i.get_url}}"><img src="{{i.imgg.url}}" class="card-img-top my_image" alt="..."  width="150px;" height="150px;"></a>
+        <div class="card-body">
+
+            <h3>{{i.name}}</h3>
+             <p>${{i.price}}</p>
+
+    <p>{{i.description}}</p>
+
+  </div>
+       </div>
+            </div>
+
+           {% endfor %}
+
+       </div>
+    <div class="mx-auto">
+        {% if products.paginator.num_pages > 1 %}
+        <hr>
+        <div class ="text-center">
+            {% for pg in products.paginator.page_range %}
+            <a href="?page={{pg}}" class="btn btn-light btn-sm {% if products.number == pg %} active {% endif %}">{{pg}}</a>
+            {% endfor %}
+
+
+        </div>
+        {% endif %}
+
+    </div>
+    <br>
+  </div>
+
+
+
+
+
+{% endblock %}
+

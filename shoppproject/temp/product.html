@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block metadescription %}
+
+{{ product.description }}
+
+
+{% endblock %}
+{% block title %}
+
+{{ product.name }}.... fruits collections in stock
+
+{% endblock %}
+{% block  content %}
+
+<div class="row product_name">
+    <div class="mx_auto">
+        <p><a href="{% url 'shoppapp:allpdtcat' %}">HOME</a>|<a href="{{product.category.get_url}}">{{product.category}}</a>|{{product.name}}</p>
+    </div>
+</div>
+<br>
+
+<div class="container">
+
+<br>
+    <div class="row">
+
+    <div class="col-12 col-sm-12 col-md-12 col-lg-6 text-center">
+        <div style="min-width:18rem">
+
+
+
+    <img src="{{product.imgg.url}}" alt="{{product.name}}"></div>
+    </div>
+
+<div class="col-12 col-sm-12 col-md-12 col-lg-6">
+    <div>
+    <h3 class="my_prod_title">{{product.name}}</h3>
+    <br>
+    <h6 class="text-justify .my_desc">{{product.description}}</h6>
+     <h6>${{product.price}}</h6>
+    <h5>{% if product.stock <= 0 %}</h5>
+    <h3 class="text-justify">OUT OF STOCK</h3>
+    {% else %}
+    <a class="btn btn-secondary"  href="{% url 'cart:add_cart' product.id %}">GO TO CART</a>
+        <br>
+        <br>
+    {% endif %}
+    </div>
+</div>
+</div>
+</div>
+</div>
+
+
+
+{% endblock %}
+<br>
+<br>
+<br>

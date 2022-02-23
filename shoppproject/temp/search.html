@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block metadescription %}
+
+<h5>WE HAVE VARIETY OF PRODUCTS</h5>
+
+
+{% endblock %}
+{% block title %}
+
+SEARCH
+
+{% endblock %}
+{% block  content %}
+<div>
+    <p class="text-center  my_search"> U have serached for :<b> "{{query}}"</b> </p>
+</div>
+<div class="container">
+    <div class="row mx_auto">
+        {% for i in products %}
+        <div class="my_bottom_margin col-9 col-sm-12  col-md-4 xol-lg-4">
+
+        <div class="card text-center" style="min-width:18rem;">
+            <a href="{{i.get_url}}"><img src="{{i.imgg.url}}" class="card-img-top my_image" alt="..."  width="150px;" height="150px;"></a>
+        <div class="card-body">
+
+            <h3>{{i.name}}</h3>
+             <p>${{i.price}}</p>
+
+    <p>{{i.description}}</p>
+
+  </div>
+       </div>
+            </div>
+        {% empty %}
+        <div class="row mx_auto">
+            <p class="text-center my_search"><b>0 result found</b></p>
+        </div>
+
+           {% endfor %}
+
+       </div>
+</div>
+{% endblock %}
